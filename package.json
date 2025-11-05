@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "drizzle-orm": "^0.44.7",
+    "fastify": "^5.6.1",
+    "nodejs": "^0.0.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.18.1"
+  }
+}
