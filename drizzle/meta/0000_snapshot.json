@@ -1,0 +1,675 @@
+{
+  "id": "40913505-f1ad-4762-b05b-e6dfcb4b8246",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.assento": {
+      "name": "assento",
+      "schema": "",
+      "columns": {
+        "id_assento": {
+          "name": "id_assento",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "fila": {
+          "name": "fila",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "numero": {
+          "name": "numero",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_sala": {
+          "name": "id_sala",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "assento_id_sala_sala_id_sala_fk": {
+          "name": "assento_id_sala_sala_id_sala_fk",
+          "tableFrom": "assento",
+          "tableTo": "sala",
+          "columnsFrom": [
+            "id_sala"
+          ],
+          "columnsTo": [
+            "id_sala"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ator": {
+      "name": "ator",
+      "schema": "",
+      "columns": {
+        "id_ator": {
+          "name": "id_ator",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_ator": {
+          "name": "nome_ator",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ator_do_filme": {
+      "name": "ator_do_filme",
+      "schema": "",
+      "columns": {
+        "id_ator": {
+          "name": "id_ator",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_filme": {
+          "name": "id_filme",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ator_do_filme_id_ator_ator_id_ator_fk": {
+          "name": "ator_do_filme_id_ator_ator_id_ator_fk",
+          "tableFrom": "ator_do_filme",
+          "tableTo": "ator",
+          "columnsFrom": [
+            "id_ator"
+          ],
+          "columnsTo": [
+            "id_ator"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ator_do_filme_id_filme_filme_id_filme_fk": {
+          "name": "ator_do_filme_id_filme_filme_id_filme_fk",
+          "tableFrom": "ator_do_filme",
+          "tableTo": "filme",
+          "columnsFrom": [
+            "id_filme"
+          ],
+          "columnsTo": [
+            "id_filme"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "ator_do_filme_id_ator_id_filme_pk": {
+          "name": "ator_do_filme_id_ator_id_filme_pk",
+          "columns": [
+            "id_ator",
+            "id_filme"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.diretor": {
+      "name": "diretor",
+      "schema": "",
+      "columns": {
+        "id_diretor": {
+          "name": "id_diretor",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_diretor": {
+          "name": "nome_diretor",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.diretor_do_filme": {
+      "name": "diretor_do_filme",
+      "schema": "",
+      "columns": {
+        "id_diretor": {
+          "name": "id_diretor",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_filme": {
+          "name": "id_filme",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "diretor_do_filme_id_diretor_diretor_id_diretor_fk": {
+          "name": "diretor_do_filme_id_diretor_diretor_id_diretor_fk",
+          "tableFrom": "diretor_do_filme",
+          "tableTo": "diretor",
+          "columnsFrom": [
+            "id_diretor"
+          ],
+          "columnsTo": [
+            "id_diretor"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "diretor_do_filme_id_filme_filme_id_filme_fk": {
+          "name": "diretor_do_filme_id_filme_filme_id_filme_fk",
+          "tableFrom": "diretor_do_filme",
+          "tableTo": "filme",
+          "columnsFrom": [
+            "id_filme"
+          ],
+          "columnsTo": [
+            "id_filme"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "diretor_do_filme_id_diretor_id_filme_pk": {
+          "name": "diretor_do_filme_id_diretor_id_filme_pk",
+          "columns": [
+            "id_diretor",
+            "id_filme"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.filme": {
+      "name": "filme",
+      "schema": "",
+      "columns": {
+        "id_filme": {
+          "name": "id_filme",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_filme": {
+          "name": "nome_filme",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duracao": {
+          "name": "duracao",
+          "type": "time",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sinopse": {
+          "name": "sinopse",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ano_lancamento": {
+          "name": "ano_lancamento",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "classificacao": {
+          "name": "classificacao",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "foto_capa": {
+          "name": "foto_capa",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.genero": {
+      "name": "genero",
+      "schema": "",
+      "columns": {
+        "id_genero": {
+          "name": "id_genero",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_genero": {
+          "name": "nome_genero",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.genero_do_filme": {
+      "name": "genero_do_filme",
+      "schema": "",
+      "columns": {
+        "id_genero": {
+          "name": "id_genero",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_filme": {
+          "name": "id_filme",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "genero_do_filme_id_genero_genero_id_genero_fk": {
+          "name": "genero_do_filme_id_genero_genero_id_genero_fk",
+          "tableFrom": "genero_do_filme",
+          "tableTo": "genero",
+          "columnsFrom": [
+            "id_genero"
+          ],
+          "columnsTo": [
+            "id_genero"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "genero_do_filme_id_filme_filme_id_filme_fk": {
+          "name": "genero_do_filme_id_filme_filme_id_filme_fk",
+          "tableFrom": "genero_do_filme",
+          "tableTo": "filme",
+          "columnsFrom": [
+            "id_filme"
+          ],
+          "columnsTo": [
+            "id_filme"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "genero_do_filme_id_genero_id_filme_pk": {
+          "name": "genero_do_filme_id_genero_id_filme_pk",
+          "columns": [
+            "id_genero",
+            "id_filme"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.item_pedido": {
+      "name": "item_pedido",
+      "schema": "",
+      "columns": {
+        "id_item_pedido": {
+          "name": "id_item_pedido",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_item_pedido": {
+          "name": "nome_item_pedido",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categoria": {
+          "name": "categoria",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantidade": {
+          "name": "quantidade",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "preco_unitario": {
+          "name": "preco_unitario",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "preco_subtotal": {
+          "name": "preco_subtotal",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_pedido": {
+          "name": "id_pedido",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "item_pedido_id_pedido_pedido_id_pedido_fk": {
+          "name": "item_pedido_id_pedido_pedido_id_pedido_fk",
+          "tableFrom": "item_pedido",
+          "tableTo": "pedido",
+          "columnsFrom": [
+            "id_pedido"
+          ],
+          "columnsTo": [
+            "id_pedido"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pedido": {
+      "name": "pedido",
+      "schema": "",
+      "columns": {
+        "id_pedido": {
+          "name": "id_pedido",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "preco_total": {
+          "name": "preco_total",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "forma_pagamento": {
+          "name": "forma_pagamento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sala": {
+      "name": "sala",
+      "schema": "",
+      "columns": {
+        "id_sala": {
+          "name": "id_sala",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_sala": {
+          "name": "nome_sala",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "capacidade": {
+          "name": "capacidade",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tipo": {
+      "name": "tipo",
+      "schema": "",
+      "columns": {
+        "id_tipo": {
+          "name": "id_tipo",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_tipo": {
+          "name": "nome_tipo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.usuario": {
+      "name": "usuario",
+      "schema": "",
+      "columns": {
+        "id_usuario": {
+          "name": "id_usuario",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome_usuario": {
+          "name": "nome_usuario",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(14)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "data_nascimento": {
+          "name": "data_nascimento",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telefone": {
+          "name": "telefone",
+          "type": "varchar(12)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "senha": {
+          "name": "senha",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_ativo": {
+          "name": "is_ativo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
