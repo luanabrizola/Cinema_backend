@@ -46,7 +46,7 @@ export class UsuarioRepository {
         return result[0]
     }
 
-    async deletear(id) {
+    async deletar(id) {
         const result = await this.db
             .update(usuario)
             .set({ is_ativo: false })
