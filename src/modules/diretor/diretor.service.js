@@ -22,21 +22,21 @@ export class DiretorService {
 
     async getById(id) {
         const diretor = await this.diretorRepository.findById(id)
-        if (!diretor) throw new Error("Usuário não encontrado.")
+        if (!diretor) throw new Error("Diretor não encontrado.")
         return diretor
     }
 
     async update(id, data) {
         const existente = await this.diretorRepository.findById(id)
-        if (!existente) throw new Error("Usuário não encontrado.")
+        if (!existente) throw new Error("Diretor não encontrado.")
 
         return await this.diretorRepository.update(id, data)
     }
 
     async delete(id) {
         const existente = await this.diretorRepository.findById(id)
-        if (!existente) throw new Error("Usuário não encontrado.")
+        if (!existente) throw new Error("Diretor não encontrado.")
 
-        return await this.diretorRepository.deletear(id)
+        return await this.diretorRepository.deletar(id)
     }
 }
