@@ -5,6 +5,7 @@ import { diretorRoutes } from './modules/diretor/diretor.routes.js';
 import { generoRoutes } from './modules/genero/genero.routes.js';
 import { atorRoutes } from './modules/ator/ator.routes.js';
 import { tipoRoutes } from './modules/tipo/tipo.routes.js';
+import { salaRoutes } from './modules/sala/sala.routes.js';
 
 const app = Fastify();
 
@@ -18,6 +19,7 @@ app.register(diretorRoutes)
 app.register(generoRoutes)
 app.register(atorRoutes)
 app.register(tipoRoutes)
+app.register(salaRoutes)
 
 app.listen({ port: 3333 }, () => {
     console.log('Servidor rodando na porta 3333');
