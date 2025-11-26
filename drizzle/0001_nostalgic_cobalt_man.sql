@@ -1,0 +1,3 @@
+ALTER TABLE "filme" 
+ALTER COLUMN "duracao" SET DATA TYPE integer 
+USING EXTRACT(EPOCH FROM duracao) / 60;

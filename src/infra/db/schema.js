@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, varchar, boolean, date, numeric, time, integer, primaryKey } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, varchar, boolean, date, numeric, time, integer, primaryKey, interval } from 'drizzle-orm/pg-core';
 
 export const sala = pgTable('sala', {
     id_sala: uuid('id_sala').primaryKey(),

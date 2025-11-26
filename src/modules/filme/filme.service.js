@@ -15,7 +15,7 @@ export class FilmeService {
             ano_lancamento: data.ano_lancamento,
             classificacao: data.classificacao,
             foto_capa: data.foto_capa,
-            is_ativo: data.is_ativo
+            is_ativo: true
         }
 
         return await this.filmeRepository.create(novoFilme)
