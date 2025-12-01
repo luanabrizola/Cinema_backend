@@ -11,6 +11,7 @@ import { filmeRoutes } from './modules/filme/filme.routes.js';
 import { assentoRoutes } from './modules/assento/assento.routes.js';
 import { atorDoFilmeRoutes } from './modules/ator_do_filme/ator_do_filme.routes.js';
 import { diretorDoFilmeRoutes } from './modules/diretor_do_filme/diretor_do_filme.routes.js';
+import { generoDoFilmeRoutes } from './modules/genero_do_filme/genero_do_filme.routes.js';
 
 const app = Fastify();
 
@@ -30,6 +31,7 @@ app.register(filmeRoutes)
 app.register(assentoRoutes)
 app.register(atorDoFilmeRoutes)
 app.register(diretorDoFilmeRoutes)
+app.register(generoDoFilmeRoutes)
 
 app.listen({ port: 3333 }, () => {
     console.log('Servidor rodando na porta 3333');
