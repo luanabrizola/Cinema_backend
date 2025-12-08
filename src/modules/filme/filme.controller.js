@@ -10,7 +10,7 @@ export class FilmeController {
 
     async getFilmes(request, reply) {
         try {
-            const filmes = await this.filmeService.findAll();
+            const filmes = await this.filmeService.getAll();
             return reply.send(filmes);
         } catch (error) {
             return reply.code(500).send({ error: error.message });
