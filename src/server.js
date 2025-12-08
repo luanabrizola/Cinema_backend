@@ -1,5 +1,9 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import multipart from '@fastify/multipart';
+import fastifyStatic from '@fastify/static';
+import path from 'path';
+
 import { usuarioRoutes } from './modules/usuario/usuario.routes.js';
 import { diretorRoutes } from './modules/diretor/diretor.routes.js';
 import { generoRoutes } from './modules/genero/genero.routes.js';
@@ -21,20 +25,36 @@ await app.register(cors, {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 });
 
-app.register(usuarioRoutes)
-app.register(diretorRoutes)
-app.register(generoRoutes)
-app.register(atorRoutes)
-app.register(tipoRoutes)
-app.register(salaRoutes)
-app.register(pedidoRoutes)
-app.register(filmeRoutes)
-app.register(assentoRoutes)
-app.register(atorDoFilmeRoutes)
-app.register(diretorDoFilmeRoutes)
-app.register(generoDoFilmeRoutes)
-app.register(itemPedidoRoutes)
-
-app.listen({ port: 3333 }, () => {
-    console.log('Servidor rodando na porta 3333');
+await app.register(multipart, {
+    limits: {
+        fileSize: 5 * 1024 * 1024 
+    }
 });
+
+await app.register(fastifyStatic, {
+    root: path.join(process.cwd(), 'imagens'),
+    prefix: '/imagens/'
+});
+
+app.register(usuarioRoutes);
+app.register(diretorRoutes);
+app.register(generoRoutes);
+app.register(atorRoutes);
+app.register(tipoRoutes);
+app.register(salaRoutes);
+app.register(pedidoRoutes);
+app.register(filmeRoutes);
+app.register(assentoRoutes);
+app.register(atorDoFilmeRoutes);
+app.register(diretorDoFilmeRoutes);
+app.register(generoDoFilmeRoutes);
+app.register(itemPedidoRoutes);
+
+try {
+    await app.listen({ port: 3333, host: '0.0.0.0' });
+    console.log('Servidor rodando na porta 3333');
+} catch (err) {
+    console.error(err);
+    process.exit(1);
+}
+
