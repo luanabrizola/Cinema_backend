@@ -22,6 +22,13 @@
       "when": 1764164743679,
       "tag": "0002_rapid_madame_web",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1765224407444,
+      "tag": "0003_eminent_nighthawk",
+      "breakpoints": true
     }
   ]
 }

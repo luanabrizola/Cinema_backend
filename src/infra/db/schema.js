@@ -7,6 +7,20 @@ export const sala = pgTable('sala', {
     is_ativo: boolean('is_ativo').notNull(),
 });
 
+export const sessao = pgTable('sessao', {
+    id_sessao: uuid('id_sessao').primaryKey(),
+    idioma: varchar('idioma').notNull(),
+    dimensao: varchar('dimensao').notNull(),
+    data: date('data').notNull(),
+    horario: time('horario').notNull(),
+    id_sala: uuid('id_sala')
+        .notNull()
+        .references(() => sala.id_sala, { onDelete: 'cascade' }),
+    id_filme: uuid('id_filme')
+        .notNull()
+        .references(() => filme.id_filme, { onDelete: 'cascade' }),
+});
+
 export const assento = pgTable('assento', {
     id_assento: uuid('id_assento').primaryKey(),
     fila: varchar('fila').notNull(),
