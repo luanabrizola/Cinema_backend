@@ -1,5 +1,5 @@
-import { db } from '../../db.js';
-import { sessao } from './sessao.schema.js'; 
+import db from '../../infra/database.js';
+import { sessao } from '../../infra/db/schema.js';
 
 export class SessaoRepository {
     async create(data) {

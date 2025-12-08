@@ -18,6 +18,7 @@ import { atorDoFilmeRoutes } from './modules/ator_do_filme/ator_do_filme.routes.
 import { diretorDoFilmeRoutes } from './modules/diretor_do_filme/diretor_do_filme.routes.js';
 import { generoDoFilmeRoutes } from './modules/genero_do_filme/genero_do_filme.routes.js';
 import { itemPedidoRoutes } from './modules/item_pedido/item_pedido.routes.js';
+import { sessaoRoutes } from './modules/sessão/sessao.routes.js';
 
 const app = Fastify({
   logger: true
@@ -54,6 +55,7 @@ app.register(atorDoFilmeRoutes);
 app.register(diretorDoFilmeRoutes);
 app.register(generoDoFilmeRoutes);
 app.register(itemPedidoRoutes);
+app.register(sessaoRoutes);
 
 const start = async () => {
   try {
