@@ -20,7 +20,7 @@ export class FilmeController {
     async getFilmeById(request, reply) {
         try {
             const id = request.params.id;
-            const filme = await this.filmeService.findById(id);
+            const filme = await this.filmeService.getById(id);
 
             if (!filme) {
                 return reply.code(404).send({ error: "Filme não encontrado" });
