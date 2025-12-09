@@ -5,9 +5,22 @@ export class AssentoController {
         this.assentoService = new AssentoService();
     }
 
-    async getAssentos(request, reply) {
-        const assentos = await this.assentoService.getAll();
-        return reply.send(assentos);
+    async getAssentos(req, reply) {
+        try {
+            const { id_sala } = req.query;
+
+            let result;
+            if (id_sala) {
+                result = await this.assentoService.getBySala(id_sala);
+            } else {
+                result = await this.assentoService.getAll();
+            }
+
+            reply.send(result);
+        } catch (error) {
+            console.error(error);
+            reply.status(500).send({ error: "Erro ao listar assentos." });
+        }
     }
 
     async getAssentoById(request, reply) {

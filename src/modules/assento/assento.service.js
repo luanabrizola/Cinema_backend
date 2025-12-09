@@ -11,6 +11,7 @@ export class AssentoService {
             id_assento: crypto.randomUUID(),
             fila: data.fila,
             numero: data.numero,
+            tipo: data.tipo,
             is_ativo: true,
             id_sala: data.id_sala
         };
@@ -27,6 +28,11 @@ export class AssentoService {
         if (!assento) throw new Error("Assento não encontrado.");
         return assento;
     }
+
+    async getBySala(id_sala) {
+    return await this.assentoRepository.findBySala(id_sala);
+    }
+
 
     async update(id, data) {
         const existente = await this.assentoRepository.findById(id);

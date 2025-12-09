@@ -24,6 +24,7 @@ export const sessao = pgTable('sessao', {
 export const assento = pgTable('assento', {
     id_assento: uuid('id_assento').primaryKey(),
     fila: varchar('fila').notNull(),
+    tipo: varchar('tipo').notNull(),
     numero: integer('numero').notNull(),
     is_ativo: boolean('is_ativo').notNull(),
     id_sala: uuid('id_sala')

@@ -1,0 +1,1 @@
+ALTER TABLE "assento" ADD COLUMN "tipo" varchar NOT NULL;

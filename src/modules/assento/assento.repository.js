@@ -14,6 +14,7 @@ export class AssentoRepository {
                 id_assento: data.id_assento,
                 fila: data.fila,
                 numero: data.numero,
+                tipo: data.tipo,
                 is_ativo: data.is_ativo,
                 id_sala: data.id_sala
             })
