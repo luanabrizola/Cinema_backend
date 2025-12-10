@@ -1,6 +1,6 @@
 import { UsuarioRepository } from "./usuario.repository.js";
 import crypto from "crypto";
-import { enviarEmail } from "../../../config/email.js" 
+// import { enviarEmail } from "../../../config/email.js" 
 
 export class UsuarioService {
     constructor() {
@@ -22,18 +22,18 @@ export class UsuarioService {
 
         const usuarioCriado = await this.usuarioRepository.create(novoUsuario);
 
-        const mensagem = `
-Olá ${usuarioCriado.nome_usuario}!
+//         const mensagem = `
+// Olá ${usuarioCriado.nome_usuario}!
 
-Seu cadastro no Cinema App foi realizado com sucesso.
+// Seu cadastro no Cinema App foi realizado com sucesso.
 
-Agora você pode acessar nossas sessões, comprar ingressos e aproveitar os filmes!
+// Agora você pode acessar nossas sessões, comprar ingressos e aproveitar os filmes!
 
-Atenciosamente,
-Equipe Cinema App
-        `;
+// Atenciosamente,
+// Equipe Cinema App
+//         `;
 
-        enviarEmail(usuarioCriado.email, "Bem-vindo ao Cinema App!", mensagem);
+//         enviarEmail(usuarioCriado.email, "Bem-vindo ao Cinema App!", mensagem);
 
         return usuarioCriado;
     }
