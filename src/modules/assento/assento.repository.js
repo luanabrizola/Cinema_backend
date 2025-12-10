@@ -36,6 +36,14 @@ export class AssentoRepository {
         return result[0] || null;
     }
 
+    async findBySala(id_sala) {
+    return await this.db
+        .select()
+        .from(assento)
+        .where(eq(assento.id_sala, id_sala));
+    }
+
+
     async update(id, data) {
         const result = await this.db
             .update(assento)
