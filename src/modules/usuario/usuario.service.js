@@ -48,6 +48,18 @@ export class UsuarioService {
         return usuario;
     }
 
+    async login(email, senha) {
+        const usuario = (await this.usuarioRepository.findAll()).find(u => u.email === email);
+        if (!usuario) throw new Error("Usuário não encontrado.");
+
+        if (usuario.senha !== senha) {
+            throw new Error("Senha incorreta.");
+        }
+
+        const { senha: _, ...usuarioSemSenha } = usuario;
+        return usuarioSemSenha;
+        } 
+
     async update(id, data) {
         const existente = await this.usuarioRepository.findById(id);
         if (!existente) throw new Error("Usuário não encontrado.");
