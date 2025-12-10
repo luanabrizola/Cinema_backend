@@ -20,6 +20,19 @@ export class SessaoController {
         }
     }
 
+    async getSessoesPorFilme(request, reply) {
+        const { id_filme } = request.params;
+        console.log("ID do filme recebido:", id_filme);
+        try {
+            const sessoes = await this.sessaoService.getByFilme(id_filme);
+            console.log("Sessoes encontradas:", sessoes);
+            return reply.send(sessoes);
+        } catch (error) {
+            return reply.code(404).send({ message: error.message });
+        }
+    }
+
+
     async createSessao(request, reply) {
         try {
             const novaSessao = await this.sessaoService.create(request.body);

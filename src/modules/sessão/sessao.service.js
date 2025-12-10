@@ -30,6 +30,11 @@ export class SessaoService {
         return sessao;
     }
 
+    async getByFilme(idFilme) {
+        return await this.sessaoRepository.findByFilmeId(idFilme);
+    }
+
+
     async update(id, data) {
         const existente = await this.sessaoRepository.findById(id);
         if (!existente) throw new Error('Sessão não encontrada.');

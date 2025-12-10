@@ -1,4 +1,5 @@
 import db from '../../infra/database.js';
+import { eq } from 'drizzle-orm';
 import { sessao } from '../../infra/db/schema.js';
 
 export class SessaoRepository {
@@ -14,6 +15,11 @@ export class SessaoRepository {
     async findById(id) {
         return await db.select().from(sessao).where(sessao.id_sessao.eq(id)).get();
     }
+
+    async findByFilmeId(idFilme) {
+        return await db.select().from(sessao).where(eq(sessao.id_filme, idFilme));
+    }
+
 
     async update(id, data) {
         const [atualizado] = await db.update(sessao)
