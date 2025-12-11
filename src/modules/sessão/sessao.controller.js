@@ -5,63 +5,49 @@ export class SessaoController {
         this.sessaoService = new SessaoService();
     }
 
+    async createSessao(request, reply) {
+        try {
+            const nova = await this.sessaoService.create(request.body);
+            reply.status(201).send(nova);
+        } catch (err) {
+            reply.status(400).send({ error: err.message });
+        }
+    }
+
     async getSessoes(request, reply) {
         const sessoes = await this.sessaoService.getAll();
-        return reply.send(sessoes);
+        reply.send(sessoes);
     }
 
     async getSessaoById(request, reply) {
-        const { id } = request.params;
         try {
-            const sessao = await this.sessaoService.getById(id);
-            return reply.send(sessao);
-        } catch (error) {
-            return reply.code(404).send({ message: error.message });
+            const sessao = await this.sessaoService.getById(request.params.id);
+            reply.send(sessao);
+        } catch (err) {
+            reply.status(404).send({ error: err.message });
         }
     }
 
     async getSessoesPorFilme(request, reply) {
-        const { id_filme } = request.params;
-        console.log("ID do filme recebido:", id_filme);
-        try {
-            const sessoes = await this.sessaoService.getByFilme(id_filme);
-            console.log("Sessoes encontradas:", sessoes);
-            return reply.send(sessoes);
-        } catch (error) {
-            return reply.code(404).send({ message: error.message });
-        }
-    }
-
-
-    async createSessao(request, reply) {
-        try {
-            const novaSessao = await this.sessaoService.create(request.body);
-            return reply.code(201).send({
-                message: 'Sessão criada com sucesso!',
-                sessao: novaSessao
-            });
-        } catch (error) {
-            return reply.code(400).send({ error: error.message });
-        }
+        const sessoes = await this.sessaoService.getByFilme(request.params.id_filme);
+        reply.send(sessoes);
     }
 
     async updateSessao(request, reply) {
-        const { id } = request.params;
         try {
-            const atualizado = await this.sessaoService.update(id, request.body);
-            return reply.send({ message: 'Sessão atualizada', sessao: atualizado });
-        } catch (error) {
-            return reply.code(404).send({ message: error.message });
+            const atualizado = await this.sessaoService.update(request.params.id, request.body);
+            reply.send(atualizado);
+        } catch (err) {
+            reply.status(404).send({ error: err.message });
         }
     }
 
     async deleteSessao(request, reply) {
-        const { id } = request.params;
         try {
-            await this.sessaoService.delete(id);
-            return reply.code(204).send();
-        } catch (error) {
-            return reply.code(404).send({ message: error.message });
+            await this.sessaoService.delete(request.params.id);
+            reply.status(204).send();
+        } catch (err) {
+            reply.status(404).send({ error: err.message });
         }
     }
 }

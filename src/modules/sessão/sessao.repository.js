@@ -3,9 +3,10 @@ import { eq } from 'drizzle-orm';
 import { sessao } from '../../infra/db/schema.js';
 
 export class SessaoRepository {
+
     async create(data) {
-        const [novaSessao] = await db.insert(sessao).values(data).returning();
-        return novaSessao;
+        const [nova] = await db.insert(sessao).values(data).returning();
+        return nova;
     }
 
     async findAll() {
@@ -13,24 +14,33 @@ export class SessaoRepository {
     }
 
     async findById(id) {
-        return await db.select().from(sessao).where(sessao.id_sessao.eq(id)).get();
+        const result = await db
+            .select()
+            .from(sessao)
+            .where(eq(sessao.id_sessao, id));
+
+        return result[0] || null;
     }
 
     async findByFilmeId(idFilme) {
-        return await db.select().from(sessao).where(eq(sessao.id_filme, idFilme));
+        return await db
+            .select()
+            .from(sessao)
+            .where(eq(sessao.id_filme, idFilme));
     }
 
-
     async update(id, data) {
-        const [atualizado] = await db.update(sessao)
+        const [upd] = await db
+            .update(sessao)
             .set(data)
-            .where(sessao.id_sessao.eq(id))
+            .where(eq(sessao.id_sessao, id))
             .returning();
-        return atualizado;
+        return upd;
     }
 
     async delete(id) {
-        return await db.delete(sessao)
-            .where(sessao.id_sessao.eq(id));
+        return await db
+            .delete(sessao)
+            .where(eq(sessao.id_sessao, id));
     }
 }

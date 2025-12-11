@@ -11,8 +11,8 @@ export class SessaoService {
             id_sessao: crypto.randomUUID(),
             idioma: data.idioma,
             dimensao: data.dimensao,
-            data: data.data,
-            horario: data.horario,
+            data: data.data,       
+            horario: data.horario, 
             id_sala: data.id_sala,
             id_filme: data.id_filme
         };
@@ -34,16 +34,24 @@ export class SessaoService {
         return await this.sessaoRepository.findByFilmeId(idFilme);
     }
 
-
     async update(id, data) {
         const existente = await this.sessaoRepository.findById(id);
         if (!existente) throw new Error('Sessão não encontrada.');
-        return await this.sessaoRepository.update(id, data);
+
+        return await this.sessaoRepository.update(id, {
+            idioma: data.idioma,
+            dimensao: data.dimensao,
+            data: data.data,        
+            horario: data.horario,  
+            id_sala: data.id_sala,
+            id_filme: data.id_filme
+        });
     }
 
     async delete(id) {
         const existente = await this.sessaoRepository.findById(id);
         if (!existente) throw new Error('Sessão não encontrada.');
+
         return await this.sessaoRepository.delete(id);
     }
 }
