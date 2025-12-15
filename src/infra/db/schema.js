@@ -36,11 +36,11 @@ export const usuario = pgTable('usuario', {
     id_usuario: uuid('id_usuario').primaryKey(),
     nome_usuario: varchar('nome_usuario').notNull(),
     tipo: text('tipo').notNull(),
-    cpf: varchar('cpf', {length: 14}).notNull(),
+    cpf: varchar('cpf').notNull(),
     data_nascimento: date('data_nascimento').notNull(),
     telefone: varchar('telefone', {length: 12}),
     email: text('email').notNull(),
-    senha: varchar('senha', {length: 20}),
+    senha: varchar('senha').notNull(),
     is_ativo: boolean('is_ativo').notNull(),
 });
 
