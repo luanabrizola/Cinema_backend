@@ -9,9 +9,38 @@ export class UsuarioService {
         this.usuarioRepository = new UsuarioRepository();
     }
 
+    validarCPF(cpf) {
+        cpf = cpf.replace(/\D/g, "");
+
+        if (cpf.length !== 11) return false;
+        if (/^(\d)\1+$/.test(cpf)) return false;
+
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+            soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+
+        let resto = (soma * 10) % 11;
+        resto = resto === 10 ? 0 : resto;
+        if (resto !== parseInt(cpf.charAt(9))) return false;
+
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+            soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+
+        resto = (soma * 10) % 11;
+        resto = resto === 10 ? 0 : resto;
+
+        return resto === parseInt(cpf.charAt(10));
+    }
+
     async create(data) {
         const senhaHash = await bcrypt.hash(data.senha, 10);
         const cpfLimpo = data.cpf.replace(/\D/g, "");
+        if (!this.validarCPF(cpfLimpo)) {
+            throw new Error("CPF inválido.");
+        }
         const cpfCriptografado = encryptCPF(cpfLimpo);
 
         const novoUsuario = {
