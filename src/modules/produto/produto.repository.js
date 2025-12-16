@@ -1,19 +1,20 @@
 import db from '../../infra/database.js';
 import { eq } from 'drizzle-orm';
-import { pedido } from '../../infra/db/schema.js';
+import { produto } from '../../infra/db/schema.js';
 
-export class PedidoRepository {
+export class ProdutoRepository {
     constructor() {
         this.db = db;
     }
 
     async create(data) {
         const result = await this.db
-            .insert(pedido)
+            .insert(produto)
             .values({
-                id_pedido: data.id_pedido,
-                preco_total: data.preco_total,
-                forma_pagamento: data.forma_pagamento,
+                id_produto: data.id_produto,
+                nome_produto: data.nome_produto,
+                preco_unitario: data.preco_unitario,
+                categoria: data.categoria,
                 is_ativo: data.is_ativo
             })
             .returning();
@@ -22,23 +23,23 @@ export class PedidoRepository {
     }
 
     async findAll() {
-        return await this.db.select().from(pedido);
+        return await this.db.select().from(produto);
     }
 
     async findById(id) {
         const result = await this.db
             .select()
-            .from(pedido)
-            .where(eq(pedido.id_pedido, id));
+            .from(produto)
+            .where(eq(produto.id_produto, id));
 
         return result[0] || null;
     }
 
     async update(id, data) {
         const result = await this.db
-            .update(pedido)
+            .update(produto)
             .set(data)
-            .where(eq(pedido.id_pedido, id))
+            .where(eq(produto.id_produto, id))
             .returning();
 
         return result[0];
@@ -46,9 +47,9 @@ export class PedidoRepository {
 
     async deletar(id) {
         const result = await this.db
-            .update(pedido)
+            .update(produto)
             .set({ is_ativo: false })
-            .where(eq(pedido.id_pedido, id))
+            .where(eq(produto.id_produto, id))
             .returning();
 
         return result[0];

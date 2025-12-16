@@ -1,0 +1,1 @@
+ALTER TABLE "item_produto" DROP COLUMN "id_pedido";
