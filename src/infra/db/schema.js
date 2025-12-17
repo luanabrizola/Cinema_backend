@@ -50,24 +50,43 @@ export const tipo = pgTable('tipo', {
     is_ativo: boolean('is_ativo').notNull(),
 });
 
-export const pedido = pgTable('pedido', {
-    id_pedido: uuid('id_pedido').primaryKey(),
-    preco_total: numeric('preco_total').notNull(),
-    forma_pagamento: text('forma_pagamento').notNull(),
+export const produto = pgTable('produto', {
+    id_produto: uuid('id_produto').primaryKey(),
+    nome_produto: varchar('nome_produto').notNull(),
+    preco_unitario: numeric('preco_unitario').notNull(),
+    categoria: text('categoria').notNull(),
     is_ativo: boolean('is_ativo').notNull(),
 });
 
-export const item_pedido = pgTable('item_pedido', {
-    id_item_pedido: uuid('id_item_pedido').primaryKey(),
-    nome_item_pedido: varchar('nome_item_pedido').notNull(),
-    categoria: text('categoria').notNull(),
+export const item_produto = pgTable('item_produto', {
+    id_item_produto: uuid('id_item_produto').primaryKey(),
+    id_ingresso: uuid('id_ingresso')
+        .notNull()
+        .references(() => ingresso.id_ingresso, { onDelete: 'cascade' }),
+    id_produto: uuid('id_produto')
+        .notNull()
+        .references(() => produto.id_produto, { onDelete: 'cascade' }),
     quantidade: integer('quantidade').notNull(),
     preco_unitario: numeric('preco_unitario').notNull(),
-    preco_subtotal: numeric('preco_subtotal').notNull(),
-    is_ativo: boolean('is_ativo').notNull(),
-    id_pedido: uuid('id_pedido')
+    is_ativo: boolean('is_ativo').notNull()
+});
+
+export const ingresso = pgTable('ingresso', {
+    id_ingresso: uuid('id_ingresso').primaryKey(),
+    id_sessao: uuid('id_sessao')
         .notNull()
-        .references(() => pedido.id_pedido, { onDelete: 'cascade' })
+        .references(() => sessao.id_sessao, { onDelete: 'cascade' }),
+    id_usuario: uuid('id_usuario')
+        .notNull()
+        .references(() => usuario.id_usuario, { onDelete: 'cascade' }),
+    valor: numeric('valor').notNull(),
+    id_assento: uuid('id_assento')
+        .notNull()
+        .references(() => assento.id_assento, { onDelete: 'cascade' }),
+    id_tipo: uuid('id_tipo')
+        .notNull()
+        .references(() => tipo.id_tipo, { onDelete: 'cascade' }),
+    is_ativo: boolean('is_ativo').notNull()
 });
 
 export const filme = pgTable('filme', {

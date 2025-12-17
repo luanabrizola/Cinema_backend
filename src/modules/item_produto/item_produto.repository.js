@@ -1,24 +1,22 @@
 import db from '../../infra/database.js';
 import { eq } from 'drizzle-orm';
-import { item_pedido } from '../../infra/db/schema.js';
+import { item_produto } from '../../infra/db/schema.js';
 
-export class ItemPedidoRepository {
+export class ItemProdutoitem_produtoRepository {
     constructor() {
         this.db = db;
     }
 
     async create(data) {
         const result = await this.db
-            .insert(item_pedido)
+            .insert(item_produto)
             .values({
-                id_item_pedido: data.id_item_pedido,
-                nome_item_pedido: data.nome_item_pedido,
-                categoria: data.categoria,
+                id_item_produto: data.id_item_produto,
+                id_ingresso: data.id_ingresso,
+                id_produto: data.id_produto,
                 quantidade: data.quantidade,
                 preco_unitario: data.preco_unitario,
-                preco_subtotal: data.quantidade * data.preco_unitario,
-                is_ativo: true,
-                id_pedido: data.id_pedido
+                is_ativo: true
             })
             .returning();
 
@@ -26,31 +24,31 @@ export class ItemPedidoRepository {
     }
 
     async findAll() {
-        return await this.db.select().from(item_pedido);
+        return await this.db.select().from(item_produto);
     }
 
-    async findByPedido(idPedido) {
+    async findByItem_produto(idItem_produto) {
         return await this.db
             .select()
-            .from(item_pedido)
-            .where(eq(item_pedido.id_pedido, idPedido));
+            .from(item_produto)
+            .where(eq(item_produto.id_item_produto, idItem_produto));
     }
 
     async findById(idItem) {
         return await this.db
             .select()
-            .from(item_pedido)
-            .where(eq(item_pedido.id_item_pedido, idItem));
+            .from(item_produto)
+            .where(eq(item_produto.id_item_produto, idItem));
     }
 
     async update(idItem, data) {
         const result = await this.db
-            .update(item_pedido)
+            .update(item_produto)
             .set({
                 ...data,
                 preco_subtotal: data.quantidade * data.preco_unitario
             })
-            .where(eq(item_pedido.id_item_pedido, idItem))
+            .where(eq(item_produto.id_item_produto, idItem))
             .returning();
 
         return result[0];
@@ -58,9 +56,9 @@ export class ItemPedidoRepository {
 
     async deletar(idItem) {
         const result = await this.db
-            .update(item_pedido)
+            .update(item_produto)
             .set({ is_ativo: false })
-            .where(eq(item_pedido.id_item_pedido, idItem))
+            .where(eq(item_produto.id_item_produto, idItem))
             .returning();
 
         return result[0];

@@ -1,20 +1,20 @@
-import { ItemPedidoService } from './item_pedido.service.js';
+import { ItemProdutoService } from './item_produto.service.js';
 
-export class ItemPedidoController {
+export class ItemProdutoController {
 
     constructor() {
-        this.itemPedidoService = new ItemPedidoService();
+        this.itemProdutoService = new ItemProdutoService();
     }
 
     async getItens(request, reply) {
-        const itens = await this.itemPedidoService.getAll();
+        const itens = await this.itemProdutoService.getAll();
         return reply.send(itens);
     }
 
-    async getByPedido(request, reply) {
-        const { id_pedido } = request.params;
+    async getByProduto(request, reply) {
+        const { id_produto } = request.params;
         try {
-            const itens = await this.itemPedidoService.getByPedido(id_pedido);
+            const itens = await this.itemProdutoService.getByProduto(id_produto);
             return reply.send(itens);
         } catch (error) {
             return reply.code(404).send({ message: error.message });
@@ -25,7 +25,7 @@ export class ItemPedidoController {
         const { id } = request.params;
 
         try {
-            const item = await this.itemPedidoService.getById(id);
+            const item = await this.itemProdutoService.getById(id);
             return reply.send(item);
         } catch (error) {
             return reply.code(404).send({ message: 'Item não encontrado' });
@@ -34,7 +34,7 @@ export class ItemPedidoController {
 
     async createItem(request, reply) {
         try {
-            const novoItem = await this.itemPedidoService.create(request.body);
+            const novoItem = await this.itemProdutoService.create(request.body);
 
             return reply.code(201).send({
                 message: 'Item criado com sucesso!',
@@ -52,7 +52,7 @@ export class ItemPedidoController {
         const { id } = request.params;
 
         try {
-            const itemAtualizado = await this.itemPedidoService.update(id, request.body);
+            const itemAtualizado = await this.itemProdutoService.update(id, request.body);
             return reply.send(itemAtualizado);
         } catch (error) {
             return reply.code(404).send({
@@ -65,7 +65,7 @@ export class ItemPedidoController {
         const { id } = request.params;
 
         try {
-            await this.itemPedidoService.delete(id);
+            await this.itemProdutoService.delete(id);
             return reply.code(204).send();
         } catch (error) {
             return reply.code(404).send({
